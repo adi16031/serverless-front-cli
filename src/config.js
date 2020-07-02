@@ -1,17 +1,17 @@
 export default {
     MAX_ATTACHMENT_SIZE: 5000000,
     s3: {
-      REGION: "us-east-2",
-      BUCKET: "todo-practice-app-uploads"
+      REGION: "us-east-1",
+      BUCKET: "notes-app1-upload1"
     },
     apiGateway: {
-      REGION: "us-east-2",
-      URL: "https://jc338drd03.execute-api.us-east-2.amazonaws.com/prod"
+      REGION: "us-east-1",
+      URL: "https://qy3ehdxsie.execute-api.us-east-1.amazonaws.com/prod"
     },
     cognito: {
-      REGION: "us-east-2",
-      USER_POOL_ID: "us-east-2_OvHI6MAcf",
-      APP_CLIENT_ID: "2t98g9clt80jkfrbm530rj36vh",
-      IDENTITY_POOL_ID: "us-east-2:77c39b46-4f9d-4d66-988f-ae39a513647e"
+      REGION: "us-east-1",
+      USER_POOL_ID: "us-east-1_plVnEW7Tu",
+      APP_CLIENT_ID: "4tmn20qfu2394c5f1fa86dmi4k",
+      IDENTITY_POOL_ID: "us-east-1:82acfdd7-ba39-4432-8468-2f9d4b4e300f"
     }
   };

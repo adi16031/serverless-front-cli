@@ -49,7 +49,7 @@ export default function NewNote() {
 
 
   function createNote(note) {
-    return API.post("notes", "/todo", {
+    return API.post("notes", "/notes", {
       body: note
     });
   }

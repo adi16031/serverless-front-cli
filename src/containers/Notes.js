@@ -19,7 +19,7 @@ export default function Notes() {
 
   useEffect(() => {
     function loadNote() {
-      return API.get("notes", `/todo/${id}`);
+      return API.get("notes", `/notes/${id}`);
     }
 
     async function onLoad() {
@@ -54,7 +54,7 @@ export default function Notes() {
   }
 
   function saveNote(note) {
-    return API.put("notes", `/todo/${id}`, {
+    return API.put("notes", `/notes/${id}`, {
       body: note
     });
   }
@@ -92,7 +92,7 @@ export default function Notes() {
   }
 
   function deleteNote() {
-    return API.del("notes", `/todp/${id}`);
+    return API.del("notes", `/notes/${id}`);
   }
 
   async function handleDelete(event) {
