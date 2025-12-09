@@ -1,0 +1,43 @@
+name: PR-Agent Automation
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  pr_agent_job:
+    runs-on: ubuntu-latest
+    name: Run PR-Agent via REST API
+    env:
+      PR_AGENT_API_URL: ${{ secrets.PR_AGENT_API_URL || 'https://625b5210691e.ngrok-free.app' }}
+      PR_URL: ${{ github.event.pull_request.html_url }}
+    
+    steps:
+      - name: Generate PR Description
+        run: |
+          PAYLOAD=$(printf '{"pr_url":"%s"}' "$PR_URL")
+          curl -X POST "$PR_AGENT_API_URL/api/v1/describe" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            --max-time 300 || echo "Description generation failed or timed out"
+      
+      - name: Review PR Code
+        run: |
+          PAYLOAD=$(printf '{"pr_url":"%s"}' "$PR_URL")
+          curl -X POST "$PR_AGENT_API_URL/api/v1/review" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            --max-time 300 || echo "Review generation failed or timed out"
+      
+      - name: Suggest Improvements
+        run: |
+          PAYLOAD=$(printf '{"pr_url":"%s"}' "$PR_URL")
+          curl -X POST "$PR_AGENT_API_URL/api/v1/improve" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            --max-time 300 || echo "Improvement suggestions failed or timed out"
